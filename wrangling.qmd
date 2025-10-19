@@ -99,7 +99,8 @@ judgments <- judgments |>
     STAI_pre_category = case_when(
       STAI_pre < 25 ~ "low",
       STAI_pre > 65 ~ "high",
-      .default = "normal"
+      is.numeric(STAI_pre) ~ "normal",
+      .default = NA
       ),
     .after = STAI_pre,
   ) |>
