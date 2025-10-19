@@ -1,9 +1,13 @@
 ---
 title: "Grouping and summarizing"
-format: html
-editor: source
+author: "Steve Huguenin"
 date: "2025-10-13"
+format: pdf
 output: html_document
+pdf-engine: lualatex
+papersize: a4paper
+embed-resources: true
+editor: source
 ---
 
 
@@ -17,7 +21,14 @@ Find meaningful short names for the functions such as `med` for  the median.
 Assign `judgments_condition_stats` to the results.
 
 ```{r}
-# Write your answer here
+library(tidyverse)
+judgments <- read_tsv("https://biostat2.uni.lu/practicals/data/judgments.tsv")
+judgments_condition_stats <- judgments |>
+  mutate(
+    across(matches("^moral_dilemma"), list(avg = mean, med = median, std = sd, min = min, max = max)),
+    .keep = "none"
+  )
+judgments_condition_stats
 ```
 
 
@@ -29,7 +40,9 @@ Find the number of subjects by `age`, `gender` and `condition`, e.g. how many 20
 Sort the resulting tibble such that the condition that contains the most populous group is sorted first (i.e. `stress` or `control` appear together). 
 
 ```{r}
-# Write your answer here
+judgments |>
+  group_by(age, gender, condition, .add = FALSE, .drop = TRUE) |>
+  tally(sort=TRUE)
 ```
 
 Ensure that the resulting tibble does not contain groups.
