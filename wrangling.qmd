@@ -25,7 +25,7 @@ Assign to the name `judgments` and correct the column types where needed.
 ```{r}
 library(tidyverse)
 judgments <- read_tsv("https://biostat2.uni.lu/practicals/data/judgments.tsv")
-glimpse(judgments) # Rows: 188 Columns: 158s
+glimpse(judgments) # Rows: 188 Columns: 158
 ```
 
 
@@ -118,9 +118,7 @@ judgments |> distinct(STAI_pre, STAI_pre_category)
 Divide all entries in the REI questionnaire by 5, the maximal value.
 
 ```{r}
-judgments <- judgments |> mutate(across(matches("^REI"), ~ .x / 5))
-judgments |>
-  select(matches("^REI"))
+judgments |> mutate(across(matches("^REI"), ~ .x / 5),.keep = "none")
 ```
 
 
