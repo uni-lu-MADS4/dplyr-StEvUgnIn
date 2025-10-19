@@ -42,7 +42,7 @@ You can combine the following tasks into a single statement.
 Select `gender`, `subject`, `age` and referring to the `STAI` questionnaire.
 
 ```{r}
-judgments |> select(gender, subject, age, matches("^STAI"))
+judgments |> select(gender, subject, age, starts_with("STAI"))
 ```
 
 
@@ -118,7 +118,7 @@ judgments |> distinct(STAI_pre, STAI_pre_category)
 Divide all entries in the REI questionnaire by 5, the maximal value.
 
 ```{r}
-judgments |> mutate(across(matches("^REI"), ~ .x / 5),.keep = "none")
+judgments |> reframe(across(starts_with("REI"), ~ .x / 5))
 ```
 
 

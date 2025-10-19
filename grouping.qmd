@@ -24,9 +24,8 @@ Assign `judgments_condition_stats` to the results.
 library(tidyverse)
 judgments <- read_tsv("https://biostat2.uni.lu/practicals/data/judgments.tsv")
 judgments_condition_stats <- judgments |>
-  mutate(
-    across(matches("^moral_dilemma"), list(avg = mean, med = median, std = sd, min = min, max = max)),
-    .keep = "none"
+  reframe(
+    across(starts_with("moral_dilemma"), list(avg = mean, med = median, std = sd, min = min, max = max))
   )
 judgments_condition_stats
 ```
