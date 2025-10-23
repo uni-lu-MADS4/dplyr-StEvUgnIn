@@ -62,7 +62,7 @@ judgments |> arrange(desc(STAI_pre))
 #### For better readability, move the subject, STAI_pre and STAI_post columns to the first positions.
 
 ```{r}
-judgments <- judgments |> relocate(c(STAI_pre, STAI_post), .before=start_date)
+judgments |> select(subject, STAI_pre, STAI_post, everything())
 ```
 
 #### Check if the data set contains duplicated rows
