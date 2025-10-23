@@ -59,7 +59,7 @@ judgments |> filter(STAI_pre > 65 & STAI_post > 40)
 judgments |> arrange(desc(STAI_pre))
 ```
 
-#### For better readability, move the subject, STAI_pre and STAI_post columns to the first positions.
+#### For better readability, move the columns `subject`, `STAI_pre` and `STAI_post` to the first positions.
 
 ```{r}
 judgments |> select(subject, STAI_pre, STAI_post, everything())
